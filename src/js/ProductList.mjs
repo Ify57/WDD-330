@@ -1,3 +1,4 @@
+import { renderListWithTemplate } from "./utils.mjs";
 const productPages = {
   "880RR": "marmot-ajax-3.html",
   "985RF": "northface-talus-4.html",
@@ -29,8 +30,7 @@ export default class ProductList {
     this.renderList(available);
   }
 
-  renderList(list) {
-    const htmlStrings = list.map(productCardTemplate);
-    this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
+    renderList(list) {
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 }
