@@ -261,3 +261,19 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Cart count badge */
+.cart {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  font-size: 0.8rem;
+  padding: 0 5px;
+  border-radius: 50%;
+}
