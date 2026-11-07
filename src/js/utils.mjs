@@ -22,6 +22,24 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-const quesryString = window.location.search;
-const urlParaams = new URLSearchParams(quesryString);
-const product = urlurlParaams.get('product')
+// get a parameter from the URL query string, e.g. getParam("product")
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param);
+}
+
+// render a list of items into a parent element using a template function
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
