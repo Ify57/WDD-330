@@ -3,8 +3,10 @@ export default function updateCartCount() {
   const badge = document.querySelector(".cart-count");
   let count = 0;
 
-  if (cart) {
+  if (Array.isArray(cart)) {
     count = cart.length;
+  } else if (cart) {
+    count = 1;
   }
 
   badge.textContent = count;
