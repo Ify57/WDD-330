@@ -270,3 +270,14 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.product-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  background-color: #f2f2f2;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
