@@ -41,23 +41,31 @@ p {
 }
 
 .logo {
-  line-height: 60px;
-  width: 245px;
-  overflow: hidden;
+  line-height: 1;
+  width: auto;
+  max-width: calc(100% - 70px);
+  overflow: visible;
   display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 30px;
-  text-align: right;
+  text-align: left;
   font-family: var(--font-headline);
+  white-space: nowrap;
+  flex-shrink: 1;
 }
 
 .logo img {
   width: 60px;
   height: 60px;
+  flex-shrink: 0;
 }
 
 .logo a {
+  display: inline-block;
   text-decoration: none;
   color: var(--font-body);
+  white-space: nowrap;
 }
 
 .hero {
@@ -114,8 +122,6 @@ button {
   border-bottom: 2px solid var(--primary-color);
 }
 
-/* End utility classes */
-
 /* Cart icon styles */
 .cart {
   padding-top: 1em;
@@ -123,12 +129,15 @@ button {
   text-align: center;
 }
 
-.cart svg {
-  width: 25px;
+.cart img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
-.cart:hover svg {
-  fill: gray;
+.cart img:hover {
+  opacity: 0.7;
 }
 
 /* End cart icon styles */
