@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -11,10 +11,17 @@ function renderCartContents() {
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   productList.innerHTML = htmlItems.join("");
+
+  // attach a click listener to each X
+  const removeButtons = document.querySelectorAll(".cart-card__remove");
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", removeFromCart);
+  });
 }
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
+  <span class="cart-card__remove" data-id="${item.Id}">X</span>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -30,6 +37,23 @@ function cartItemTemplate(item) {
 </li>`;
 
   return newItem;
+}
+
+function removeFromCart(event) {
+  // get the id of the item that was clicked
+  const id = event.target.dataset.id;
+
+  // get the cart from local storage
+  const cartItems = getLocalStorage("so-cart") || [];
+
+  // remove the item with that id
+  const newCart = cartItems.filter((item) => item.Id !== id);
+
+  // save the cart back to local storage
+  setLocalStorage("so-cart", newCart);
+
+  // show the cart again
+  renderCartContents();
 }
 
 renderCartContents();
