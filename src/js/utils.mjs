@@ -31,3 +31,15 @@ export function getParam(param) {
   const product = urlParams.get(param);
   return product;
 }
+
+//receive 5 arguments: templateFn, parentElement, list, position, clear
+//often afterbegin will be the position you want to insert into, often don't want to clear contents; set default values
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  const htmlStringObj = list.map(templateFn);
+
+  //add logic to clear out element provided if clear is true
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStringObj.join(""));
+}
