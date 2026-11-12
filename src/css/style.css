@@ -281,3 +281,27 @@ footer {
   font-size: 0.9rem;
   text-align: center;
 }
+
+/* Home page product categories */
+.categories {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.categories a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+
+.categories img {
+  width: 100px;
+  height: 100px;
+}
