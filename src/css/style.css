@@ -283,7 +283,7 @@ footer {
 }
 
 /* Center dynamic announcement messages */
-.alert-list>p {
+.alert-list > p {
   text-align: center;
 }
 
@@ -309,4 +309,12 @@ footer {
 .checkout-button:focus-visible {
   outline: 3px solid var(--primary-color);
   outline-offset: 3px;
+}
+
+/* Cart quantity input */
+.cart-card__qty-input {
+  width: 4rem;
+  padding: 0.25rem;
+  font-size: 1rem;
+  text-align: center;
 }

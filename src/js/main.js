@@ -9,11 +9,7 @@ const dataSource = new ProductData("tents");
 const listElement = document.querySelector(".product-list");
 
 if (listElement) {
-  const productList = new ProductList(
-    "tents",
-    dataSource,
-    listElement,
-  );
+  const productList = new ProductList("tents", dataSource, listElement);
 
   productList.init();
 }
