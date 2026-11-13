@@ -1,40 +1,30 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Sleep Outside | Cart</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="../js/cart.js" type="module"></script>
-  </head>
+  <title>Sleep Outside | Cart</title>
 
-  <body>
-    <header class="divider">
-      <div class="logo">
-        <img src="/images/noun_Tent_2517.svg" alt="Sleep Outside logo" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="../js/cart.js" type="module"></script>
+</head>
 
-        <a href="/"> Sleep <span class="highlight">Outside</span> </a>
-      </div>
+<body>
+  <header class="divider" id="main-header"></header>
 
-      <div class="cart">
-        <a href="/cart/" aria-label="Shopping cart">
-          <img src="/images/cart.svg" alt="Shopping cart" />
-        </a>
-      </div>
-    </header>
+  <main class="divider">
+    <section class="products">
+      <h2>My Cart</h2>
 
-    <main class="divider">
-      <section class="products">
-        <h2>My Cart</h2>
+      <ul class="product-list">
+        <!-- Cart items are dynamically rendered by cart.js. -->
+      </ul>
+    </section>
+  </main>
 
-        <ul class="product-list">
-          <!-- Cart items are dynamically rendered by cart.js. -->
-        </ul>
-      </section>
-    </main>
+  <footer id="main-footer"></footer>
+</body>
 
-    <footer>&copy;NOT a real business</footer>
-  </body>
 </html>

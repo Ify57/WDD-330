@@ -281,3 +281,8 @@ footer {
   font-size: 0.9rem;
   text-align: center;
 }
+
+/* Center dynamic announcement messages */
+.alert-list>p {
+  text-align: center;
+}
