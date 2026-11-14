@@ -23,10 +23,11 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-// get a parameter from the URL query string
 export function getParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
+  const product = urlParams.get(param);
+  console.log(product);
+  return product;
 }
 
 // render a list of items into a parent element using a template function
@@ -37,10 +38,9 @@ export function renderListWithTemplate(
   position = "afterbegin",
   clear = false,
 ) {
+  const htmlStrings = list.map(templateFn);
   if (clear) {
     parentElement.innerHTML = "";
   }
-
-  const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }

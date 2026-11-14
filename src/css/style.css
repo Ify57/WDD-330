@@ -98,7 +98,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -249,6 +249,37 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+
+.categories {
+  display: flex;
+  margin: 50px;
+  justify-content: space-between;
+}
+
+.categories img {
+  height: 150px;
+  width: auto;
+}
+
+.categories figcaption {
+  text-align: center;
+}
+
+.categories a {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+
+.categories a:hover {
+  text-decoration: underline;
+}
+
+.categories img:hover {
+  border: 3px solid var(--dark-grey);
+  border-radius: 8px;
+  padding: 10px;
+}
+
 
 @media screen and (min-width: 500px) {
   body {
