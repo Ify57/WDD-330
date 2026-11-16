@@ -25,3 +25,15 @@ export function setClick(selector, callback) {
 const quesryString = window.location.search;
 const urlParaams = new URLSearchParams(quesryString);
 const product = urlurlParaams.get('product')
+
+export function renderListWithTemplate
+(templateFn, 
+  parentElement, list, position="afterbegin",clear=false){
+  if(clear){
+    parentElement.innerHTML = "";
+  }
+  const htmlStrings = list.map(templateFn);
+  paraentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+ 
+    
+  }
