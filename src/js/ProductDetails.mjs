@@ -22,10 +22,15 @@ export default class ProductDetails {
       .addEventListener("click", this.addProductToCart.bind(this));
   }
 
-  addProductToCart() {
+   addProductToCart() {
     const cart = getLocalStorage("so-cart") || [];
+    const existing = cart.find((item) => item.Id === this.product.Id);
 
-    cart.push(this.product);
+    if (existing) {
+      existing.Quantity = (existing.Quantity || 1) + 1;
+    } else {
+      cart.push({ ...this.product, Quantity: 1 });
+    }
 
     setLocalStorage("so-cart", cart);
 
