@@ -47,7 +47,14 @@ function combineDuplicates(cartItems) {
   });
   return combined;
 }
-
+/*
+function calculateCartTotal(cartItems) {
+  let cartTotalPrice = 0;
+  cartItems.forEach((item) => {
+    const itemPrice = 
+  })
+}
+*/
 export default class ShoppingCart {
   constructor(key, listElement) {
     this.key = key;
