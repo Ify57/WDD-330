@@ -37,3 +37,31 @@ export function renderListWithTemplate
  
     
   }
+
+  export function renderWithTemplate
+(template,
+ parentElement,
+ data,
+callback){
+      parentElement.innerHTML = template;
+
+  if(callback){
+    callback(data);
+  }
+  const htmlStrings = list.map(templateFn);
+  paraentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+  }
+  async function loadTemplate(url){
+    const response = await fetch(url);
+    const template = await response.text();
+    return template;
+  }
+  export async function loadHeaderFooter(){
+    const headerTemplate = await loadTemplate("/partials/header.html");
+    const headerelement = document.getElementById("header");
+    renderWithTemplate(headerTemplate, headerelement);
+
+    const footerTemplate = await loadTemplate("/partials/footer.html");
+    const footerelement = document.getElementById("footer");
+    renderWithTemplate(footerTemplate, footerelement);
+  }
