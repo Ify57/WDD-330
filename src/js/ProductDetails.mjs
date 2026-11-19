@@ -29,7 +29,10 @@ export default class ProductDetails {
 
     setLocalStorage("so-cart", cart);
 
-    alert("Product successfully added to cart!");
+    const cartIcon = document.querySelector(".cart");
+    cartIcon.classList.add("cart-bounce");
+
+    setTimeout(() => cartIcon.classList.remove("cart-bounce"), 600);
   }
 
   renderProductDetails() {

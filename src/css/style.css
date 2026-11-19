@@ -140,6 +140,29 @@ button {
   opacity: 0.7;
 }
 
+/* Cart icon bounce animation */
+@keyframes cart-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-12px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  70% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.cart-bounce {
+  animation: cart-bounce 0.6s ease;
+}
+
 /* End cart icon styles */
 
 .mission {
