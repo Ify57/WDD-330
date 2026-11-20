@@ -22,7 +22,7 @@ export default class ProductDetails {
       .addEventListener("click", this.addProductToCart.bind(this));
   }
 
-   addProductToCart() {
+  addProductToCart() {
     const cart = getLocalStorage("so-cart") || [];
     const existing = cart.find((item) => item.Id === this.product.Id);
 

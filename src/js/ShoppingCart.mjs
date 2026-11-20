@@ -4,7 +4,7 @@ import {
   renderListWithTemplate,
 } from "./utils.mjs";
 
-function cartItemTemplate(item) {
+export function cartItemTemplate(item) {
   const quantity = item.Quantity || 1;
   const lineTotal = (Number(item.FinalPrice) * quantity).toFixed(2);
   const image = item.Images?.PrimarySmall || item.Image;
@@ -47,14 +47,7 @@ function combineDuplicates(cartItems) {
   });
   return combined;
 }
-/*
-function calculateCartTotal(cartItems) {
-  let cartTotalPrice = 0;
-  cartItems.forEach((item) => {
-    const itemPrice = 
-  })
-}
-*/
+
 export default class ShoppingCart {
   constructor(key, listElement) {
     this.key = key;

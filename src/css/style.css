@@ -319,96 +319,45 @@ footer {
   text-align: center;
 }
 
-.hidden {
-  display: none;
-}
-
-.summary {
-  width: 40%;
-  border: 1px solid var(--primary-color);
-  margin: 1rem 0;
-  padding: 10px;
-
-  h2 {
-    border-bottom: 2px solid var(--dark-grey);
-  }
-}
-
-.summaryInfo {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-
-  p {
-    margin: 0;
-    padding-bottom: 0;
-  }
-}
-
-.orderTotal {
-  border-top: 3px double var(--dark-grey);
-  margin-top: 10px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-}
-
 /*Form*/
-.checkoutForm {
-  border: 1px solid var(--primary-color);
-  font-size: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 0;
-  padding: 10px;
-
-  h2 {
-    border-bottom: 2px solid var(--dark-grey);
-  }
+.checkout-form {
 
   fieldset {
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid var(--dark-grey);
-
-    legend {
-      padding: 10px;
-      margin-left: 5px;
-    }
-
-    label {
-      margin-left: 10px;
-    }
-
-    input {
-      margin: 0 10px 10px 10px;
-      height: 44px;
-      font-size: 1.2rem;
-      padding-left: 5px;
-
-      &:valid {
-        border: 3px groove var(--secondary-color);
-      }
-
-      &:invalid {
-        border: 3px groove var(--primary-color);
-      }
-    }
+    margin: 1rem;
   }
 
-  input[type="submit"] {
-    margin: 1.5rem auto;
-    width: 60%;
-    padding: 0.75em 2em;
-    background-color: var(--secondary-color);
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    font-size: var(--large-font);
-    border-radius: 4px;
+  legend {
+    margin-left: 10px;
+    padding: 5px;
+  }
 
-    &:hover {
-      background-color: var(--tertiary-color);
+  div {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+  }
+
+  label {
+    margin-top: 1rem;
+  }
+
+  input {
+    height: 44px;
+    margin: 2px 10px 10px;
+    ;
+  }
+
+  .checkout__address {
+    border-top: 1px solid var(--dark-grey);
+  }
+
+  .checkout-summary {
+    padding: 10px 0;
+
+    ul {
+      list-style: none;
+      padding-left: 1rem;
     }
+
   }
 }
