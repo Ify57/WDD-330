@@ -1,4 +1,4 @@
-﻿const baseURL = import.meta.env.VITE_SERVER_URL;
+const baseURL = import.meta.env.VITE_SERVER_URL;
 
 const checkoutURL =
   "https://wdd330-backend-osp8.onrender.com/checkout";
@@ -11,22 +11,26 @@ const categories = [
 ];
 
 async function convertToJson(response) {
-  const data = await response.json().catch(() => null);
+  const jsonResponse = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(
-      data?.message ||
-      data?.Message ||
+    const error = new Error(
+      jsonResponse?.message ||
+      jsonResponse?.Message ||
       `HTTP Error: ${response.status}`,
     );
+
+    error.name = "servicesError";
+    error.details = jsonResponse;
+    error.status = response.status;
+
+    throw error;
   }
 
-  return data;
+  return jsonResponse;
 }
 
 export default class ExternalServices {
-
-  // Fetch products belonging to a specific category.
   async fetchCategory(category) {
     const searchTerm = encodeURIComponent(category);
 
@@ -48,30 +52,25 @@ export default class ExternalServices {
     return [];
   }
 
-  // Retrieve products by category or search across categories.
   async getData(category) {
     const searchTerm = category.trim().toLowerCase();
 
-    // Preserve normal category browsing.
     if (categories.includes(searchTerm)) {
       return this.fetchCategory(searchTerm);
     }
 
-    // Search across all available product categories.
     const categoryResults = await Promise.all(
       categories.map((item) => this.fetchCategory(item)),
     );
 
     const allProducts = categoryResults.flat();
 
-    // Remove duplicate products.
     const uniqueProducts = [
       ...new Map(
         allProducts.map((product) => [product.Id, product]),
       ).values(),
     ];
 
-    // Match product names, brands, and descriptions.
     return uniqueProducts.filter((product) => {
       const searchableText = [
         product.Name,
@@ -87,7 +86,6 @@ export default class ExternalServices {
     });
   }
 
-  // Retrieve an individual product by its ID.
   async findProductById(id) {
     const response = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(response);
@@ -95,15 +93,12 @@ export default class ExternalServices {
     return data.Result;
   }
 
-  // Submit the customer's order to the checkout backend.
   async checkout(order) {
     const response = await fetch(checkoutURL, {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },
-
       body: JSON.stringify(order),
     });
 

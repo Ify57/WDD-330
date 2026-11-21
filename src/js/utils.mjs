@@ -1,19 +1,19 @@
-// wrapper for querySelector...returns matching element
+// Wrapper for querySelector
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
 
-// retrieve data from localstorage
+// Retrieve data from localStorage
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
-// save data to local storage
+// Save data to localStorage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-// set a listener for both touchend and click
+// Set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
@@ -23,13 +23,13 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
-// get a parameter from the URL query string
+// Get a parameter from the URL query string
 export function getParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
 
-// render a list of items into a parent element using a template function
+// Render a list of items into a parent element
 export function renderListWithTemplate(
   templateFn,
   parentElement,
@@ -45,7 +45,7 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
-// Render a single HTML template into a parent element
+// Render a single HTML template
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
 
@@ -54,7 +54,7 @@ export function renderWithTemplate(template, parentElement, data, callback) {
   }
 }
 
-// Load an HTML template from an external file
+// Load an HTML template
 export async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
@@ -62,7 +62,7 @@ export async function loadTemplate(path) {
   return template;
 }
 
-// Load and render the shared header and footer
+// Load the shared header and footer
 export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");
@@ -72,4 +72,63 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+}
+
+// Display an alert message
+export function alertMessage(message, scroll = true) {
+  const main = document.querySelector("main");
+
+  if (!main) return;
+
+  const existingAlert = document.querySelector(".alert");
+
+  if (existingAlert) {
+    existingAlert.remove();
+  }
+
+  let messageText = message;
+
+  if (typeof message !== "string") {
+    messageText =
+      message?.message ||
+      message?.Message ||
+      message?.title ||
+      "Something went wrong. Please try again.";
+
+    if (typeof messageText !== "string") {
+      messageText = JSON.stringify(messageText);
+    }
+  }
+
+  const alert = document.createElement("div");
+
+  alert.className = "alert";
+  alert.setAttribute("role", "alert");
+  alert.setAttribute("aria-live", "assertive");
+
+  const text = document.createElement("p");
+  text.textContent = messageText;
+
+  const closeButton = document.createElement("button");
+
+  closeButton.type = "button";
+  closeButton.className = "alert-close";
+  closeButton.textContent = "Dismiss";
+  closeButton.setAttribute("aria-label", "Dismiss error message");
+
+  closeButton.addEventListener("click", () => {
+    alert.remove();
+  });
+
+  alert.appendChild(text);
+  alert.appendChild(closeButton);
+
+  main.prepend(alert);
+
+  if (scroll) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 }

@@ -93,6 +93,11 @@ export default class CheckoutProcess {
       tax: this.tax.toFixed(2),
     };
 
-    return await this.dataSource.checkout(order);
+    try {
+      return await this.dataSource.checkout(order);
+    } catch (error) {
+      console.error("CheckoutProcess error:", error);
+      throw error;
+    }
   }
 }
