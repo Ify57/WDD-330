@@ -98,7 +98,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -283,7 +283,7 @@ footer {
 }
 
 /* Center dynamic announcement messages */
-.alert-list > p {
+.alert-list>p {
   text-align: center;
 }
 
@@ -317,4 +317,100 @@ footer {
   padding: 0.25rem;
   font-size: 1rem;
   text-align: center;
+}
+
+
+.alert {
+  border: 2px solid var(--primary-color);
+  /*to make semi-transparent -- 80% color, 20% transparent*/
+  background-color: color-mix(in srgb, var(--primary-color) 80%, transparent);
+  display: flex;
+  width: 80%;
+  max-width: 750px;
+
+  margin: 1rem;
+
+  button {
+    background-color: color-mix(in srgb, var(--primary-color) 0%, transparent);
+    color: var(--dark-grey);
+    margin-right: 0;
+  }
+}
+
+/*Form*/
+.checkout-form {
+  max-width: 800px;
+
+  fieldset {
+    margin: 1rem;
+  }
+
+  legend {
+    margin-left: 1rem;
+    padding: 5px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+  }
+
+  label {
+    margin-top: 1rem;
+  }
+
+  input {
+    height: 44px;
+    margin: 2px 10px 10px;
+    padding: 5px;
+
+    &:valid {
+      border: 3px groove var(--secondary-color);
+      background-color: color-mix(in srgb, var(--light-grey) 0%, transparent);
+    }
+
+    &:invalid {
+      background-color: color-mix(in srgb, #e6edf8 80%, transparent);
+      border: 3px groove;
+    }
+
+    &:user-invalid {
+      border: 3px groove var(--primary-color);
+      background-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
+    }
+  }
+
+  .checkout__address {
+    border-top: 1px solid var(--dark-grey);
+  }
+
+  .checkout-summary {
+    padding: 1rem 0;
+
+    ul {
+      list-style: none;
+      padding-left: 10px;
+      display: grid;
+
+    }
+
+    li {
+      margin: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      p {
+        text-align: right;
+      }
+    }
+
+    li:last-child {
+      border-top: 4px double var(--dark-grey);
+    }
+
+    #orderTotal {
+      font-weight: bold;
+    }
+  }
 }
