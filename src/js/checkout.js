@@ -1,10 +1,9 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, alertMessage } from "./utils.mjs";
 import CheckoutProcess from "./CheckoutProcess.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 loadHeaderFooter();
 
-// Create the services needed for checkout.
 const dataSource = new ExternalServices();
 
 const checkout = new CheckoutProcess(
@@ -13,37 +12,49 @@ const checkout = new CheckoutProcess(
   dataSource,
 );
 
-// Calculate the subtotal when the page loads.
 checkout.init();
 
-// Handle order submission.
 const checkoutForm = document.querySelector("#checkout-form");
 
 checkoutForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   try {
-    // Calculate the final order amounts.
     checkout.calculateOrderTotal();
 
-    // Submit the order to the backend.
-    const response = await checkout.checkout(checkoutForm);
+    await checkout.checkout(checkoutForm);
 
-    console.log("Order successfully submitted:", response);
 
-    alert("Your order was successfully placed!");
 
-    // Clear the cart after successful submission.
     localStorage.removeItem("so-cart");
 
-    // Reset the checkout form.
-    checkoutForm.reset();
-
+    window.location.href = "/checkout/success.html";
   } catch (error) {
-    console.error("Checkout error:", error);
 
-    alert(
-      "We could not process your order. Please check your information and try again.",
-    );
+
+
+    const serverDetails = error.details;
+
+    let message =
+      serverDetails?.message ||
+      serverDetails?.Message ||
+      serverDetails?.title ||
+      error.message ||
+      "We could not process your order. Please check your information and try again.";
+
+    if (
+      serverDetails?.errors &&
+      typeof serverDetails.errors === "object"
+    ) {
+      const validationMessages = Object.values(
+        serverDetails.errors,
+      ).flat();
+
+      if (validationMessages.length > 0) {
+        message = validationMessages.join(" ");
+      }
+    }
+
+    alertMessage(message);
   }
 });
