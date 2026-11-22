@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -20,9 +20,13 @@ export default class ProductDetails {
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
+
+    document
+      .getElementById("addToWishlist")
+      .addEventListener("click", this.addProductToWishlist.bind(this));
   }
 
-   addProductToCart() {
+  addProductToCart() {
     const cart = getLocalStorage("so-cart") || [];
     const existing = cart.find((item) => item.Id === this.product.Id);
 
@@ -37,6 +41,20 @@ export default class ProductDetails {
     alert("Product successfully added to cart!");
   }
 
+  addProductToWishlist() {
+    const wishlist = getLocalStorage("so-wishlist") || [];
+    const alreadySaved = wishlist.some((item) => item.Id === this.product.Id);
+
+    if (alreadySaved) {
+      alertMessage("This item is already on your wishlist.");
+      return;
+    }
+
+    wishlist.push(this.product);
+    setLocalStorage("so-wishlist", wishlist);
+    alertMessage("Added to your wishlist!");
+  }
+
   renderProductDetails() {
     const productElement = document.getElementById("product");
 
@@ -48,7 +66,7 @@ export default class ProductDetails {
 
       <img
         class="divider"
-        src="${this.product.Image}"
+        src="${this.product.Images?.PrimaryLarge || this.product.Image}"
         alt="${this.product.Name}"
       />
 
@@ -65,6 +83,9 @@ export default class ProductDetails {
       <div class="product-detail__add">
         <button id="addToCart" data-id="${this.product.Id}">
           Add to Cart
+        </button>
+        <button id="addToWishlist" class="wishlist-button" data-id="${this.product.Id}">
+          ♡ Add to Wishlist
         </button>
       </div>
     `;
