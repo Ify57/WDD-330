@@ -398,3 +398,34 @@ footer {
   }
 }
 
+/* Wishlist */
+.cart {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wishlist-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: inherit;
+}
+
+.product-detail__add {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.wishlist-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.wishlist-remove {
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+}

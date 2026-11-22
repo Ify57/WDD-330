@@ -15,11 +15,7 @@ if (category && listElement && categoryTitle) {
   if (searchTerm) {
     categoryTitle.textContent = `Search results for "${searchTerm}"`;
 
-    const productList = new ProductList(
-      searchTerm,
-      dataSource,
-      listElement,
-    );
+    const productList = new ProductList(searchTerm, dataSource, listElement);
 
     productList.init().catch((error) => {
       console.error("Product loading error:", error);
